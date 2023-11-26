@@ -3,6 +3,7 @@
         "dientity.h": "c",
         "raylib.h": "c",
         "common.h": "c",
-        "controller.h": "c"
+        "controller.h": "c",
+        "context.h": "c"
     }
 }

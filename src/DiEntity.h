@@ -17,6 +17,7 @@ typedef struct Box
     Vector2 pos;
     int width;
     int hight;
+    bool isoccupy;
     
 }Box;
 
