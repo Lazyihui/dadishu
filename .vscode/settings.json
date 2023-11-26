@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "dientity.h": "c"
+        "dientity.h": "c",
+        "raylib.h": "c",
+        "common.h": "c",
+        "controller.h": "c"
     }
 }

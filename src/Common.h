@@ -1,24 +1,63 @@
 #ifndef COMMON_H__
 #define COMMON_H__
 #include "stdio.h"
-#include "..\include\raylib.h"
-#include "DiEntity.h"
-#include "time.h"
 
-// void ArrShift_Time(){
-//     time_t start_time = time(NULL);
+// /////////////////////////////////////////////////给数组排序
+void sort(int *arr, int length) {
 
-//      time_t current_time = time(NULL);
+    for (int i = 0; i < length; i++) {
+        for (int j = 0; j < length - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int a = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = a;
+            }
+        }
+    }
+}
 
-//         if (current_time - start_time >= 2) {
-//             n++;
-//             for (int i = 0; i < n; i++) {
-//                 arr[i] = i + 1;
-//                 printf("%d\r\n", arr[i]);}
-//                 start_time = current_time;
+///////////////////////////////////////////////二分 有序从小到大
 
-//                 printf("n=%d\r\n", n);
-//             }
-// }
+int Find_Binary(int *arr, int target, int arrlength) {
+    int min = 0;
+    int max = arrlength - 1;
+    int index = -1;
+
+    if (arr[min] == target) {
+        index = min;
+    } else if (arr[max] == target) {
+        index = max;
+    }
+    if (index == -1) {
+        for (int i = 0; i < arrlength; i++) {
+            if (min == max) {
+                break;
+            }
+            int mid = (max + min) / 2;
+            if (arr[mid] == target) {
+                index = mid;
+                break;
+            } else if (arr[mid] > target) {
+                max = mid;
+            } else if (arr[mid] < target) {
+                min = mid;
+            }
+        }
+    }
+    return index;
+}
+
+/////////////////////////////////////////////////////暴力查找数组
+int Find_violent(int *arr, int arrlength, int target) {
+    int index = -1;
+    for (int i = 0; i < arrlength; i++) {
+        if (arr[i] == target) {
+            index = i;
+        }
+    }
+    return index;
+}
+
+
 
 #endif
