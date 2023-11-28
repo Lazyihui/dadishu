@@ -57,7 +57,14 @@ int Find_violent(int *arr, int arrlength, int target) {
     }
     return index;
 }
-
-
-
+///////////////////////////////////////////////////////////////////////////////鼠标和圆的交叉检测
+bool IsCirlceInsideMouse(Vector2 dipos,float diradius,Vector2 mouse) {
+    int a = diradius*diradius;
+    int b = (mouse.x - dipos.x)*(mouse.x-dipos.x)+(mouse.y-dipos.y)*(mouse.y-dipos.y);
+    if (b>=a) {
+        return false;
+    } else {
+        return true;
+    }
+}
 #endif

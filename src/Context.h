@@ -6,6 +6,7 @@ typedef struct Context {
     int arr[10];
 
     time_t last_time;
+    time_t last_fadetime;
     /////////////////////////////////////////box
     Box boxarr[9]; // 中数量  数组下标 数组长度
     Box box;

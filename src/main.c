@@ -22,7 +22,7 @@ void DrawAll(Context *ctx) {
         Box a = boxes[i];
         DrawRectangle(a.pos.x, a.pos.y, a.width, a.hight, a.color);
     }
-
+    //////////////////////////////////////////////////////画地鼠
     Di *dishus = ctx->diarrpos;
     for (int i = 0; i < ctx->dicount; i++) {
         Di a = dishus[i];
@@ -54,7 +54,7 @@ int main() {
     InitWindow(500, 500, "cyh");
     Context ctx = {0};
     ContextInit(&ctx);
-
+    // Context *contx = {0};
     const int LINE_COUNT = 3;
     const int COLUMN_COUNT = 3;
     for (int x = 0; x < COLUMN_COUNT; x += 1) {
@@ -82,8 +82,13 @@ int main() {
             ctx.dishu.radius = ctx.diarr->radius;
             ctx.dishu.pos.x = cur_x;
             ctx.dishu.pos.y = cur_y;
+            printf("cur_x=%d\r\n", cur_x);
+            // printf("di=%d\r\n", ctx.dishu.pos.x);
 
             ctx.diarr[ctx.diindex] = ctx.dishu;
+            // printf("x=%d\r\n", ctx.diarr[ctx.diindex].pos.x);
+            // printf("di=%d\r\n", ctx.dishu.pos.x);
+
             ctx.diindex++;
         }
     }
@@ -102,30 +107,36 @@ int main() {
         BeginDrawing();
         ClearBackground(WHITE);
         // const char *b = TextFormat("%d", a);
+        /////////////////////////////////////////////////每隔两秒生成地鼠
         time_t current_time = time(NULL);
 
         if (current_time - ctx.last_time >= 2) {
-            int index_index = get_rand(0, count);////////下标
+            int index_index = get_rand(0, count); ////////下标
             int index = randomArray[index_index];
             ctx.diarrpos[ctx.dicount] = ctx.diarr[index];
 
             for (int i = 0; i < count; i++) {
-                if (randomArray[i] == index_index) {
-                    Arr_SwapCount(randomArray, count, i);
-                    count = count-1;
-                    break;    
-                }
-                
+                // if (randomArray[i] == index_index) {
+                Arr_SwapCount(randomArray, count, i);
+                count = count - 1;
+                break;
+                // }
             }
 
             ctx.last_time = current_time;
             ctx.dicount++;
         }
+        DrawAll(&ctx);
 
+        Vector2 mousepos = GetMousePosition();
+        bool inside = IsCirlceInsideMouse(ctx.diarrpos->pos, ctx.diarr->radius, mousepos);
+        if (inside && IsMouseButtonPressed(0)) {
+
+            DrawCircle(ctx.diarrpos->pos.x, ctx.diarrpos->pos.y, 20, YELLOW);
+        }
         // for (int i = 0; i < 9; i++) {
         //     Box a = ctx.boxarr[i];
         // }
-        DrawAll(&ctx);
 
         EndDrawing();
     }
